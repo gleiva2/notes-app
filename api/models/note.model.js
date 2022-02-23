@@ -8,7 +8,7 @@ const noteSchema = new mongoose.Schema({
   body: {
     type: String,
   },
-});
+}, {timestamps : true});
 
 noteSchema.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
