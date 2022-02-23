@@ -23,17 +23,16 @@ npm run lint
 # api
 
 ## Project setup
-'''
+```
 npm install 
-'''
+```
 
 ## Compiles and hot-reloads for development
-'''
+```
 npm run dev
-'''
+```
 
 # MongoDB
 
 ## Setup
-'''
 MongoDB server running locally 
