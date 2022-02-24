@@ -108,22 +108,22 @@ export default {
         });
     },
 
-    checkTitle: function () {
-      if (this.note.title == null) {
-        this.status = "Title cannot be empty!";
-      } else {
-        this.status = "Note saved!";
-      }
-    },
+    // checkTitle: function () {
+    //   if (this.note.title == null) {
+    //     this.status = "Title cannot be empty!";
+    //   } else {
+    //     this.status = "Note saved!";
+    //   }
+    // },
   },
 
   mounted: function () {
     this.getNote(this.$route.params.id);
-    this.checkTitle();
+    // this.checkTitle();
   },
 
   watch: function () {
-    this.checkTitle();
+    // this.checkTitle();
   },
 };
 </script>
