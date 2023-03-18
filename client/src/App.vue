@@ -27,10 +27,5 @@ export default {
   data: () => ({
     drawer: null,
   }),
-  mounted() {
-    // this.$root.$on('noteAdded', () => {
-    //   console.log("note added")
-    // })
-  }
 };
 </script>

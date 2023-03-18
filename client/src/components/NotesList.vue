@@ -70,8 +70,9 @@ export default {
     },
   },
 
-  mounted: function () {
-    this.getNotes();
+  async mounted() {
+    await this.getNotes();
+    
     this.$root.$on("updateNotesList", () => {
       this.getNotes();
     });
