@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app color="blue-grey">
-      <NotesList :key="componentKey" />
+      <NotesList />
     </v-navigation-drawer>
 
     <v-app-bar app color="blue-grey" dark>
@@ -26,18 +26,11 @@ export default {
   },
   data: () => ({
     drawer: null,
-    componentKey: 0,
   }),
-  methods: {
-    rerender() {
-      this.componentKey += 1;
-    },
-  },
-  mounted: function () {
-    this.$root.$on("event", (note) => {
-      console.log(note);
-      this.rerender();
-    });
-  },
+  mounted() {
+    // this.$root.$on('noteAdded', () => {
+    //   console.log("note added")
+    // })
+  }
 };
 </script>

@@ -73,7 +73,6 @@ export default {
 
   data: function () {
     return {
-      title: null,
       selectedItem: 1,
       note: null,
       message: null,
@@ -82,21 +81,21 @@ export default {
   },
 
   methods: {
-    getNote: function (id) {
-      axios
+    async getNote (id) {
+      await axios
         .get(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.note = response.data));
     },
 
-    deleteNote: function (id) {
-      axios
+    async deleteNote (id) {
+      await axios
         .delete(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.message = response.data));
       this.$router.push("/");
     },
 
-    updateNote: function (id) {
-      axios
+    async updateNote (id) {
+      await axios
         .patch(`http://localhost:3000/notes/${id}`, {
           title: this.note.title,
           body: this.note.body,
@@ -107,23 +106,10 @@ export default {
           this.status = "Title cannot be empty!";
         });
     },
-
-    // checkTitle: function () {
-    //   if (this.note.title == null) {
-    //     this.status = "Title cannot be empty!";
-    //   } else {
-    //     this.status = "Note saved!";
-    //   }
-    // },
   },
 
   mounted: function () {
     this.getNote(this.$route.params.id);
-    // this.checkTitle();
-  },
-
-  watch: function () {
-    // this.checkTitle();
   },
 };
 </script>

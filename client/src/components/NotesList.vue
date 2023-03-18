@@ -5,7 +5,7 @@
       <v-list-item-group color="teal">
         <v-list-item v-for="(note, i) in notes" :key="i" :to="note.id">
           <v-list-item-content>
-            <v-list-item-title v-text="note.title"></v-list-item-title>
+            <v-list-item-title>{{ note.title }}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
             <v-checkbox
@@ -26,10 +26,7 @@
     <v-btn
       v-if="selectedItems != null && selectedItems != 0"
       color="error"
-      v-on:click="
-        deleteMultipleNotes(selectedItems);
-        $root.$emit('event', note);
-      "
+      @click="deleteMultipleNotes(selectedItems)"
     >
       Delete
     </v-btn>
@@ -44,32 +41,40 @@ export default {
 
   data: function () {
     return {
-      selectedItems: null,
+      selectedItems: [],
       notes: null,
     };
   },
 
   methods: {
-    getNotes: function () {
-      axios
+    async getNotes() {
+      await axios
         .get("http://localhost:3000/notes")
         .then((response) => (this.notes = response.data));
     },
-    deleteNote: function (id) {
-      axios
+    async deleteNote(id) {
+      await axios
         .delete(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.message = response.data));
+
+      await this.getNotes();
       this.$router.push("/");
     },
-    deleteMultipleNotes: function (notesList) {
-      notesList.forEach((noteId) => {
-        this.deleteNote(noteId);
+    async deleteMultipleNotes(notesList) {
+      notesList.forEach(async (noteId) => {
+        await this.deleteNote(noteId);
       });
+
+      this.selectedItems = []
+      await this.getNotes();
     },
   },
 
   mounted: function () {
     this.getNotes();
+    this.$root.$on("noteAdded", () => {
+      this.getNotes();
+    });
   },
 };
 </script>
