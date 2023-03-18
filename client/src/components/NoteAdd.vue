@@ -51,7 +51,7 @@ export default {
         })
         .then((response) => {
           this.message = response.data
-          this.$root.$emit('noteAdded')
+          this.$root.$emit('updateNotesList')
           this.$router.push({name: "NoteView", params: {id: response.data.id}});
         })
         .catch((error) => {

@@ -72,7 +72,7 @@ export default {
 
   mounted: function () {
     this.getNotes();
-    this.$root.$on("noteAdded", () => {
+    this.$root.$on("updateNotesList", () => {
       this.getNotes();
     });
   },

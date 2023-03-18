@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!loading">
     <v-text-field
       v-model="note.title"
       label="Title"
@@ -77,6 +77,7 @@ export default {
       note: null,
       message: null,
       status: "",
+      loading: true,
     };
   },
 
@@ -91,6 +92,8 @@ export default {
       await axios
         .delete(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.message = response.data));
+
+      this.$root.$emit('updateNotesList')
       this.$router.push("/");
     },
 
@@ -105,11 +108,15 @@ export default {
           console.log(error);
           this.status = "Title cannot be empty!";
         });
+
+      this.$root.$emit('updateNotesList')
     },
   },
 
-  mounted: function () {
-    this.getNote(this.$route.params.id);
+  async mounted () {
+    this.loading = true
+    await this.getNote(this.$route.params.id);
+    this.loading = false
   },
 };
 </script>
