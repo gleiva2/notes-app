@@ -71,7 +71,7 @@ import axios from "axios";
 export default {
   name: "NotesList",
 
-  data: function () {
+  data () {
     return {
       selectedItem: 1,
       note: null,

@@ -39,7 +39,7 @@ import axios from "axios";
 export default {
   name: "NotesList",
 
-  data: function () {
+  data () {
     return {
       selectedItems: [],
       notes: null,
@@ -72,7 +72,7 @@ export default {
 
   async mounted() {
     await this.getNotes();
-    
+
     this.$root.$on("updateNotesList", () => {
       this.getNotes();
     });
