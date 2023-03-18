@@ -20,7 +20,7 @@
       </v-list-item-group>
     </v-list>
 
-    <v-btn to="/add-note" small class="mx-2" fab dark color="teal lighten-1">
+    <v-btn to="/add-note" small class="mx-2 mb-2" fab dark color="teal lighten-1">
       <v-icon dark> mdi-plus </v-icon>
     </v-btn>
 

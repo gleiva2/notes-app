@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!loading">
+  <v-container v-if="!loading" fluid>
     <v-text-field
       v-model="note.title"
       label="Title"
@@ -16,52 +16,26 @@
       auto-grow
       color="teal"
     ></v-textarea>
-    <v-container fluid>
-      <v-row>
-        <v-col class="d-flex align-left">
-          <v-btn
-            v-on:click="
-              updateNote($route.params.id);
-              $root.$emit('event', note);
-            "
-            color="teal lighten-1"
-            dark
-          >
-            Save
-          </v-btn>
-          <v-btn
-            v-on:click="
-              deleteNote($route.params.id);
-              $root.$emit('event', note);
-            "
-            dark
-            color="blue-grey"
-            >Delete</v-btn
-          >
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-col class="d-flex align right">
-          <p class="d-flex" align-end>
-            Created: {{ moment(note.createdAt).format("MM/DD/YYYY hh:mmA") }}
-          </p>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          ><p>{{ status }}</p>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-spacer></v-spacer>
-        <v-col class="d-flex align-right">
-          <p>
-            Updated: {{ moment(note.updatedAt).format("MM/DD/YYYY hh:mmA") }}
-          </p>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-row>
+      <v-col>
+        <v-btn
+          @click="updateNote($route.params.id)"
+          color="teal lighten-1"
+          dark
+          class="mr-2"
+        >
+          Save
+        </v-btn>
+        <v-btn @click="deleteNote($route.params.id)" dark color="blue-grey"
+          >Delete</v-btn
+        >
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col class="text-right">
+        <p>Created: {{ moment(note.createdAt).format("MM/DD/YYYY hh:mmA") }}</p>
+        <p>Updated: {{ moment(note.updatedAt).format("MM/DD/YYYY hh:mmA") }}</p>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -71,7 +45,7 @@ import axios from "axios";
 export default {
   name: "NotesList",
 
-  data () {
+  data() {
     return {
       selectedItem: 1,
       note: null,
@@ -82,22 +56,23 @@ export default {
   },
 
   methods: {
-    async getNote (id) {
+    async getNote(id) {
       await axios
         .get(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.note = response.data));
     },
 
-    async deleteNote (id) {
+    async deleteNote(id) {
       await axios
         .delete(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.message = response.data));
 
-      this.$root.$emit('updateNotesList')
-      this.$router.push("/");
+      this.$root.$emit("updateNotesList");
+      if (this.$router.history.current.name !== "NoteAdd")
+        this.$router.push({ name: "NoteAdd" });
     },
 
-    async updateNote (id) {
+    async updateNote(id) {
       await axios
         .patch(`http://localhost:3000/notes/${id}`, {
           title: this.note.title,
@@ -109,14 +84,14 @@ export default {
           this.status = "Title cannot be empty!";
         });
 
-      this.$root.$emit('updateNotesList')
+      this.$root.$emit("updateNotesList");
     },
   },
 
-  async mounted () {
-    this.loading = true
+  async mounted() {
+    this.loading = true;
     await this.getNote(this.$route.params.id);
-    this.loading = false
+    this.loading = false;
   },
 };
 </script>
