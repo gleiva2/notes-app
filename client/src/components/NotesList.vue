@@ -13,6 +13,7 @@
               v-model="selectedItems"
               :value="note.id"
               multiple
+              @click.prevent
             ></v-checkbox>
           </v-list-item-action>
         </v-list-item>
@@ -56,17 +57,15 @@ export default {
       await axios
         .delete(`http://localhost:3000/notes/${id}`)
         .then((response) => (this.message = response.data));
-
-      await this.getNotes();
-      this.$router.push("/");
     },
     async deleteMultipleNotes(notesList) {
-      notesList.forEach(async (noteId) => {
-        await this.deleteNote(noteId);
-      });
+      for (let note of notesList) {
+        await this.deleteNote(note);
+      }
 
       this.selectedItems = []
       await this.getNotes();
+      this.$router.push({name: "NoteAdd"});
     },
   },
 
