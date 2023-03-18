@@ -65,7 +65,8 @@ export default {
 
       this.selectedItems = []
       await this.getNotes();
-      this.$router.push({name: "NoteAdd"});
+
+      if (this.$router.history.current.name !== 'NoteAdd') this.$router.push({name: "NoteAdd"});
     },
   },
 
