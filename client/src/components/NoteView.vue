@@ -17,7 +17,7 @@
       color="teal"
     ></v-textarea>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-btn
           @click="updateNote($route.params.id)"
           color="teal lighten-1"
