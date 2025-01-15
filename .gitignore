@@ -1,3 +1,2 @@
-client/node_modules/.cache
-client/node_modules/.cache/eslint/6ffd8ccf.json
-api/node_modules/.cache
+node_modules
+node_modules/.*
