@@ -1,4 +1,4 @@
-# Notes App Monorepo
+# Notes App
 
 This repository is a monorepo containing both the frontend (Vue.js) and backend (Node.js/Express) for the Notes App, managed with npm workspaces.
 
