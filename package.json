@@ -1,0 +1,13 @@
+{
+  "name": "notes-app",
+  "private": true,
+  "workspaces": ["client", "api"],
+  "scripts": {
+    "dev": "concurrently \"npm:start-backend\" \"npm:start-frontend\"",
+    "start-backend": "npm --workspace api run dev",
+    "start-frontend": "npm --workspace client run serve"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
