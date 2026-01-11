@@ -12,8 +12,9 @@ const cors = require("cors");
 /**
  * Import, instantiate, and connect to MongoDB server
  */
+require('dotenv').config();
 const mongoose = require("mongoose");
-dbUrl = "mongodb://localhost:27017/notes_db";
+const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/notes_db";
 mongoose.set("runValidators", true);
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 const db = mongoose.connection;
@@ -26,4 +27,5 @@ app.use(cors());
 const router = require("./routes/notes.routes");
 app.use("/notes", router);
 
-app.listen(3000, () => console.log("Server started."));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server started on port ${port}`));
