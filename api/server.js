@@ -27,5 +27,5 @@ app.use(cors());
 const router = require("./routes/notes.routes");
 app.use("/notes", router);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 app.listen(port, () => console.log(`Server started on port ${port}`));

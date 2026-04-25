@@ -45,7 +45,7 @@ export default {
   methods: {
     async postNote () {
       await axios
-        .post("http://localhost:3000/notes", {
+        .post("http://localhost:3002/notes", {
           title: this.title,
           body: this.body,
         })
