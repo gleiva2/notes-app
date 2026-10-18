@@ -58,13 +58,13 @@ export default {
   methods: {
     async getNote(id) {
       await axios
-        .get(`http://localhost:3002/notes/${id}`)
+        .get(`/notes/${id}`)
         .then((response) => (this.note = response.data));
     },
 
     async deleteNote(id) {
       await axios
-        .delete(`http://localhost:3002/notes/${id}`)
+        .delete(`/notes/${id}`)
         .then((response) => (this.message = response.data));
 
       this.$root.$emit("updateNotesList");
@@ -74,7 +74,7 @@ export default {
 
     async updateNote(id) {
       await axios
-        .patch(`http://localhost:3002/notes/${id}`, {
+        .patch(`/notes/${id}`, {
           title: this.note.title,
           body: this.note.body,
         })
