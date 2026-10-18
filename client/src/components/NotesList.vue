@@ -50,12 +50,12 @@ export default {
   methods: {
     async getNotes() {
       await axios
-        .get("http://localhost:3002/notes")
+        .get("/notes")
         .then((response) => (this.notes = response.data));
     },
     async deleteNote(id) {
       await axios
-        .delete(`http://localhost:3002/notes/${id}`)
+        .delete(`/notes/${id}`)
         .then((response) => (this.message = response.data));
     },
     async deleteMultipleNotes(notesList) {
