@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Root covers the npm workspaces (client/ and api/).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # 0 = no routine version-update PRs; security updates still open as before.
+    open-pull-requests-limit: 0
+    ignore:
+      # Vue 2 -> 3 and Vuetify 2 -> 3+ need a manual migration, not a bump.
+      - dependency-name: "vue"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vuetify"
+        update-types: ["version-update:semver-major"]
